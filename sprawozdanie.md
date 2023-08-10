@@ -77,33 +77,29 @@ Zmienna decyzyjna jest binarna, a funkcją celu jest minimalizacja różnic sum 
 
 
 
-Dla planszy 9x9 i ograniczeń
-R = [0,5,3,4,0,5,1,3,3,3,0]
-C = [0,5,2,2,2,4,2,4,1,5,0] 
+Dla planszy 6x6 i ograniczeń
+R = [0,4,1,3,1,0,4,0]
+C = [0,3,2,1,3,3,1,0]
 
-Rozwiązanie otrzymane w 1,91 s.
+Rozwiązanie otrzymane w 0,56 s.
 
-0	0	0	0	0	0	0	0	0	0	0
+0	0	0	0	0	0	0	0
 
-0	1	1	1	0	1	0	0	0	1	0
+0	1	1	0	0	0	1	0	
 
-0	0	0	0	0	1	0	1	0	1	0
+0	0	0	0	1	0	1	0			
 
-0	1	0	1	0	0	0	1	0	1	0
+0	1	0	0	0	0	0	0	
 
-0	0	0	0	0	0	0	0	0	0	0
+0	1	0	1	0	0	1	0	
 
-0	1	0	0	1	1	1	0	1	0	0
+0	1	0	1	0	0	1	0	
 
-0	1	0	0	0	0	0	0	0	0	0
+0	0	0	1	0	0	0	0	
 
-0	0	0	0	0	1	1	1	0	0	0
+0	0	0	0	0	0	0	0	
 
-0	1	1	0	0	0	0	0	0	1	0
 
-0	0	0	0	1	0	0	1	0	1	0
-
-0	0	0	0	0	0	0	0	0	0	0
 
 # 
 
@@ -164,35 +160,32 @@ Dopóki To > Tk:
 
 Zmienne o poszczególnych wartościach To, kosztu i minimum przechowywałem w tablicach dla poszczególnych iteracji oraz mierzyłem czas wykonywania się algorytmu dla danego przykładu
 
-Implementacja SA dla planszy 9x9 i ograniczeń R = [0,5,3,4,0,5,1,3,3,3,0]
-C = [0,5,2,2,2,4,2,4,1,5,0], funkcje pomocnicze, zapisy zmian temperatur i wizualizacja wyników.
+Implementacja SA dla planszy 6x6 i ograniczeń R = R = [0,4,1,3,1,0,4,0]
+C = [0,3,2,1,3,3,1,0], funkcje pomocnicze, zapisy zmian temperatur i wizualizacja wyników.
  
 
-Minimum dla rozmiaru planszy 9 x 9 :18 Minimalne rozwiązanie:
+Minimum dla rozmiaru planszy 6 x 6 :8
 
-[[0 0 0 0 0 0 0 0 0 0 0]
+Minimalne rozwiązanie:
 
-[0 1 1 0 1 1 0 0 1 1 0]
+[[0 0 0 0 0 0 0 0]
 
-[0 0 0 0 0 0 0 0 0 0 0]
+ [0 1 1 0 1 0 1 0]
 
-[0 1 0 1 1 0 0 0 1 0 0]
+ [0 0 0 0 0 0 1 0]
+ 
+ [0 1 0 0 0 0 0 0]
+ 
+ [0 1 0 1 0 1 0 0]
+ 
+ [0 1 0 1 0 1 0 0]
+ 
+ [0 1 0 0 0 0 0 0]
+ 
+ [0 0 0 0 0 0 0 0]]
 
-[0 0 0 0 0 0 1 0 0 0 0]
+czas trwania SA dla rozmiaru planszy 6 x 6: 10.331079244613647
 
-[0 0 1 0 0 0 1 0 0 0 0]
-
-[0 0 0 0 0 0 0 0 0 1 0]
-
-[0 0 0 1 0 1 0 1 0 0 0]
-
-[0 0 0 1 0 0 0 1 0 0 0]
-
-[0 1 0 0 0 1 0 1 0 1 0]
-
-[0 0 0 0 0 0 0 0 0 0 0]]
-
-czas trwania SA dla rozmiaru planszy 9 x 9: 1447.0972390174866
 # 
 
 Implementacja SA dla planszy 3x3 i R = [0,2,0,3,0], C = [0,2,1,2,0], zapisy zmian temperatur i wizualizacja wyników.
@@ -214,15 +207,15 @@ czas trwania SA dla rozmiaru planszy 3 x 3: 0.07295894622802734s
 
 # Wnioski
 
-Dla plansz 3x3 solver IBM CPLEX sprawił się nieporównywalnie lepiej niż algorytm SA. 
+Dla plansz 3x3 solver IBM CPLEX oraz algorytm SA doprowadziły do poprawnego rozwiązania, lecz metaheurystyka SA w python pozwoliła osiągnąc poprawne rozwiązanie szybciej.
 
-Czasy otrzymania rozwiązań są szybsze, a co więcej i same rozwiązania lepsze (przy planszy 9x9 SA dla zadanych parametrów nie znalazł lepszego rozwiązania, a solver uzyskał je bardzo szybko). 
+Przy wiekszych rozmiarach planszy (6x6), czasy otrzymania rozwiązań w IBM CPLEX są szybsze, a co więcej i same rozwiązania lepsze (przy planszy 6x6 SA dla zadanych parametrów nie znalazł lepszego rozwiązania, a solver uzyskał je bardzo szybko). 
 
 Modyfikując parametry (zmniejszając alfę, zwiększając To, albo zmniejszając Tk), pozwalając programowi na dłuższe działanie i obliczanie prawdopodobnie moglibyśmy uzyskać podobnie dobre rozwiązania kosztem jednak złożoności czasowej.
 
-Dla większych przykładów, wykraczających poza możliwości solvera, metaheurystyka SA mogłaby sprawdzić się jednak lepiej, znajdując dopuszczalne rozwiązanie po jakimś czasie.
+Dla większych przykładów, wykraczających poza możliwości solvera, metaheurystyka SA (przy modyfikacji niektórych parametrów) mogłaby sprawdzić się jednak lepiej, znajdując dopuszczalne rozwiązanie, jednak po jakimś dłuższym czasie.
 
-Różnica czasów znajdywania rozwiązywania dla różnych rozmiarów planszy jest zaskakująco inna dla solvera i SA. W solverze, znalezienie rozwiązania dla bardziej rozbudowanego przykładu, zajęło tylko 5 razy dłużej czasu niż dla przykładu 3x3. S przypadku SA znalezienie rozwiązania dla bardziej rozbudowanego 20 671 razy dłużej. 
+Różnica czasów znajdywania rozwiązywania dla różnych rozmiarów planszy jest zaskakująco inna dla solvera i SA. W solverze, znalezienie rozwiązania dla bardziej rozbudowanego przykładu, zajęło tylko 2 razy dłużej czasu niż dla przykładu 3x3. S przypadku SA znalezienie rozwiązania dla bardziej rozbudowanego 143 razy dłużej. 
 
 Gdyby chcieć zawrzeć, istniejący w pierwotnej i oryginalnej wersji łamigłówki dodatkowo ograniczenie rozmieszczenia całej floty (statków różnego rodzaju), czas rozwiązywania byłby jeszcze dłuższy.
 
